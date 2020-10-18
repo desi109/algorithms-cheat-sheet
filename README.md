@@ -8,5 +8,5 @@ Links:
 
 
 
-![algorithms-cheat-sheet](https://github.com/desi109/algorithms-cheat-sheet/blob/master/algorithms-cheat-sheet.png?raw=true)
+![algorithms-cheat-sheet](https://github.com/desi109/algorithms-cheat-sheet/blob/master/algorithms-cheat-sheet.jpg?raw=true)
 
