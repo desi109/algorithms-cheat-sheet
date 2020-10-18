@@ -1,10 +1,12 @@
 # Algorithms - cheat sheet
 
-https://visualgo.net/en/sorting
-https://lamfo-unb.github.io/2019/04/21/Sorting-algorithms/
-https://bg.khanacademy.org/computing/computer-science/algorithms
+Links:
+*[Algorithms visualization](https://visualgo.net/en/sorting) 
+*[Algorithms - good description](https://lamfo-unb.github.io/2019/04/21/Sorting-algorithms/) 
+*[Algorithms - khanacademy](https://bg.khanacademy.org/computing/computer-science/algorithms) 
 
-x-special/nautilus-clipboard
-copy
-file:///home/deisi/github/algorithms-cheat-sheet/algorithms-cheat-sheet.png
+
+
+
+![algorithms-cheat-sheet](https://github.com/desi109/algorithms-cheat-sheet/blob/master/algorithms-cheat-sheet.png?raw=true)
 
