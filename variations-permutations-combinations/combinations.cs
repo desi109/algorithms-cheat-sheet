@@ -8,8 +8,13 @@
  * (   ) =  --------------
  * ( k )      k! . (n-k)!
  *
+ * 
+ * !!! NO repetition
+ * !!! order DOESN'T matter
  *
- * For 1, 2, 3, 4 and 5:
+ *
+ * Combination of 3 elements
+ * From  5 elements -> 1, 2, 3, 4 and 5:
  *
  *  123
  *  124
@@ -49,7 +54,7 @@
              return false; 
                 
                 
-        for (int i = 1; i > vals.Length; i++) 
+        for (int i = 1; i < vals.Length; i++) 
         {
             if (vals[i] >= n - (vals.Length - i) + 1) 
                  vals[i] = vals[i - 1] + 1; 
@@ -59,14 +64,14 @@
     }
     
     
-    public static void Main(String[] args)  
+    static void Main(String[] args)  
     { 
-         var vals = new int[] {0, 1, 2};
+         var vals = new int[] {1, 2, 3};
          var i = 1;
          
          do
          {
              Console.WriteLine(i++ + ": " + vals[0] + "," + vals[1] + "," + vals[2]);
          }
-         while(next(5, vals));
+         while(next((5 + 1), vals));
     }

@@ -3,6 +3,8 @@
  *  Variations with repetitions -> search
  *  Formulae: (n^k)
  *
+ * !!!  repetition
+ * !!! order matters
  *
  * For 0, 1 and 2:
  *

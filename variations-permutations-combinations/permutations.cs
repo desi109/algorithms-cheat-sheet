@@ -4,15 +4,17 @@
  *
  *  Formulae: n!
  *
+ * !!! NO repetition
+ * !!! order matters
  *
- * For 1, 2, 3, 4 and 5:
+ * For 0, 1, 2 :
  *
- *  ABC
- *  ACB
- *  BAC
- *  BCA
- *  CAB
- *  CBA
+ *  123
+ *  132
+ *  213
+ *  231
+ *  312
+ *  321
  *
  *  Space Complexity ->  S(3) = 3
  *  Time Complexity  ->  T(3) = 3! = 6 
@@ -32,37 +34,43 @@
          if (i <= 0)
              return false;
            
-        int j = vals.Length - 1;        
-        vals[vals.Length - 1]++;
-        for (int i = vals.Length - 1; i > 0; i--) 
+        int j = vals.Length - 1; 
+        while(vals[j] <= vals[i - 1])    
+               j--;
+                  
+        swap(ref vals[i - 1], ref vals[j]);
+        
+        j =vals.Length - 1;
+        while(i < j)
         {
-            if (vals[i] >= n - (vals.Length - i) + 1) 
-                 vals[i -1]++; 
-        }        
-          
-                
-        if (vals[0] > n - vals.Length) 
-             return false; 
-                
-                
-        for (int i = 1; i > vals.Length; i++) 
-        {
-            if (vals[i] >= n - (vals.Length - i) + 1) 
-                 vals[i] = vals[i - 1] + 1; 
-        }            
+             swap(ref vals[i], ref vals[j]);
+             i++;
+             j--;
+        }
          
          return true; 
     }
     
     
+    
+    static void swap(ref int num1, ref int num2)
+    {
+        int num3;
+         
+        num3 = num1;
+        num1 = num2;
+        num2 = num3;
+    }
+    
+    
     public static void Main(String[] args)  
     { 
-         var vals = new int[] {0, 1, 2};
+         var vals = new int[] {1, 2, 3};
          var i = 1;
          
          do
          {
              Console.WriteLine(i++ + ": " + vals[0] + "," + vals[1] + "," + vals[2]);
          }
-         while(next(5, vals));
+         while(next(vals));
     }
