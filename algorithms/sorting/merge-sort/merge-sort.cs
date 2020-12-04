@@ -1,108 +1,123 @@
 /** 
  *
- *  Space Complexity ->  O(n)
+ *  Space Complexity ->  O(n + log n) = O(n)
  *  Time Complexity  ->  O(n . log n)
  *
  *
- * Step 1:    
- *         [35, 12, 29, 15, 42] 
- *         n = 5 (arr.Length)   
- *         Get the numbers 35 and 12
- *         12 < 35    so    minIdx = 12
- *         12 < 29    so    minIdx = 12
- *         12 < 15    so    minIdx = 12
- *         12 < 42    so    minIdx = 12
+ *  MergeSort(arr[], l,  r)
+ *  If r > l :
+ *     1. Find the middle point to divide the array into two halves:  
+ *             middle m = (l+r)/2
  *
- *         We have 35 and  minIdx = 12  so we move  35 < -- > 12 
- *         -->  [12, 35, 29, 15, 42] 
- *          
+ *     2. Call mergeSort for first half:   
+ *             Call mergeSort(arr, l, m)
  *
- * Step 2:   
- *         [12, 35, 29, 15, 42] 
- *         Get the numbers 35 and 29
- *         29 < 35    so    minIdx = 29
- *         29 > 15    so    minIdx = 15
- *         15 < 42    so    minIdx = 15
+ *     3. Call mergeSort for second half:
+ *             Call mergeSort(arr, m+1, r)
  *
- *         We have 35 and  minIdx = 15  so we move  35 < -- > 15
- *         -->  [12, 15, 29, 35, 42] 
- *
- * Step 3:   
- *         [12, 15, 29, 35, 42]
- *         Get the numbers 29 and 35
- *         29 < 35    so    minIdx = 29
- *         29 < 42    so    minIdx = 29
- *
- *         We have minIdx = 29 and  35  so we DON'T move
- *         -->  [12, 15, 29, 35, 42] 
- *
-  * Step 3:   
- *         [12, 15, 29, 35, 42]
- *         Get the numbers 35 and 42
- *         35 < 42    so    minIdx = 35
- *
- *         We have minIdx = 35 and  42  so we DON'T move
- *         -->  [12, 15, 29, 35, 42] 
+ *     4. Merge the two halves sorted in step 2 and 3:
+ *             Call merge(arr, l, m, r)
  *
  */
  
 
-    static int partition(int []arr, int low, 
-                                   int high) 
+void merge(int []arr, int l, int m, int r) 
+{ 
+  // Find sizes of two subarrays to be merged 
+  int n1 = m - l + 1; 
+  int n2 = r - m; 
+  
+  // Create temp arrays 
+  int []L = new int[n1]; 
+  int []R = new int[n2]; 
+  int i, j; 
+    
+  // Copy data to temp arrays 
+  for (i = 0; i < n1; ++i) 
+    L[i] = arr[l + i]; 
+  for (j = 0; j < n2; ++j) 
+    R[j] = arr[m + 1 + j]; 
+  
+  // Merge the temp arrays 
+  
+  // Initial indexes of first and second subarrays 
+  i = 0; 
+  j = 0; 
+  
+  // Initial index of merged subarry array 
+  int k = l; 
+  while (i < n1 && j < n2)  
+  { 
+    if (L[i] <= R[j])  
     { 
-        int pivot = arr[high];  
-          
-        // index of smaller element 
-        int i = (low - 1);  
-        for (int j = low; j < high; j++) 
-        { 
-            // If current element is smaller  
-            // than the pivot 
-            if (arr[j] < pivot) 
-            { 
-                i++; 
-  
-                // swap arr[i] and arr[j] 
-                int temp = arr[i]; 
-                arr[i] = arr[j]; 
-                arr[j] = temp; 
-            } 
-        } 
-  
-        // swap arr[i+1] and arr[high] (or pivot) 
-        int temp1 = arr[i+1]; 
-        arr[i+1] = arr[high]; 
-        arr[high] = temp1; 
-  
-        return i+1; 
+      arr[k] = L[i]; 
+      i++; 
     } 
-  
-  
-    /* The main function that implements QuickSort() 
-    arr[] --> Array to be sorted, 
-    low --> Starting index, 
-    high --> Ending index */
-    static void quickSort(int []arr, int low, int high) 
+    else 
     { 
-        if (low < high) 
-        { 
-              
-            /* pi is partitioning index, arr[pi] is  
-            now at right place */
-            int pi = partition(arr, low, high); 
-  
-            // Recursively sort elements before 
-            // partition and after partition 
-            quickSort(arr, low, pi-1); 
-            quickSort(arr, pi+1, high); 
-        } 
+      arr[k] = R[j]; 
+      j++; 
     } 
+    k++; 
+  } 
   
-    // A utility function to print array of size n 
-    static void printArray(int []arr, int n) 
-    { 
-        for (int i = 0; i < n; ++i) 
-            Console.Write(arr[i] + " "); 
-              
-        Console.WriteLine(); 
-    } 
+  // Copy remaining elements of L[] if any  
+  while (i < n1)  
+  { 
+    arr[k] = L[i]; 
+    i++; 
+    k++; 
+  } 
+  
+  // Copy remaining elements of R[] if any  
+  while (j < n2)  
+  { 
+    arr[k] = R[j]; 
+    j++; 
+    k++; 
+  } 
+} 
+
+  
+// Main function that sorts arr[l..r] using merge() 
+void sort(int []arr,  
+          int l, int r) 
+{ 
+  if (l < r)  
+  { 
+    // Find the middle point 
+    int m = (l + r) / 2; 
+  
+    // Sort first and second halves 
+    sort(arr, l, m); 
+    sort(arr, m + 1, r); 
+  
+    // Merge the sorted halves 
+    merge(arr, l, m, r); 
+  } 
+} 
+
+  
+// A utility function to print array of size n */ 
+static void printArray(int []arr) 
+{ 
+  int n = arr.Length; 
+  for (int i = 0; i < n; ++i) 
+    Console.Write(arr[i] + " "); 
+  Console.WriteLine(); 
+} 
+
+  
+// Driver method 
+public static void Main(String []args) 
+{ 
+  int []arr = {12, 11, 13,  
+               5, 6, 7}; 
+  Console.WriteLine("Given Array"); 
+  printArray(arr); 
+  MergeSort ob = new MergeSort(); 
+  ob.sort(arr, 0, arr.Length - 1); 
+  Console.WriteLine("\nSorted array"); 
+  printArray(arr); 
+} 
+
